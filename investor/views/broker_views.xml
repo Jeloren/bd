@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_broker_form" model="ir.ui.view">
+        <field name="name">investor.broker.form</field>
+        <field name="model">investor.broker</field>
+        <field name="arch" type="xml">
+            <form string="Брокер">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="license_number"/>
+                        <field name="contact_details"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_broker_tree" model="ir.ui.view">
+        <field name="name">investor.broker.tree</field>
+        <field name="model">investor.broker</field>
+        <field name="arch" type="xml">
+            <tree string="Брокеры">
+                <field name="name"/>
+                <field name="license_number"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_broker" model="ir.actions.act_window">
+        <field name="name">Брокеры</field>
+        <field name="res_model">investor.broker</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

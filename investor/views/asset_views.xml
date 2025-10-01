@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_asset_form" model="ir.ui.view">
+        <field name="name">investor.asset.form</field>
+        <field name="model">investor.asset</field>
+        <field name="arch" type="xml">
+            <form string="Актив">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="ticker"/>
+                        <field name="asset_type"/>
+                        <field name="currency"/>
+                        <field name="unit_price"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_asset_tree" model="ir.ui.view">
+        <field name="name">investor.asset.tree</field>
+        <field name="model">investor.asset</field>
+        <field name="arch" type="xml">
+            <tree string="Активы">
+                <field name="name"/>
+                <field name="ticker"/>
+                <field name="asset_type"/>
+                <field name="unit_price"/>
+                <field name="currency"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_asset" model="ir.actions.act_window">
+        <field name="name">Активы</field>
+        <field name="res_model">investor.asset</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

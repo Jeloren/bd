@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_transaction_form" model="ir.ui.view">
+        <field name="name">investor.transaction.form</field>
+        <field name="model">investor.transaction</field>
+        <field name="arch" type="xml">
+            <form string="Транзакция">
+                <sheet>
+                    <group>
+                         <field name="account_id"/>
+                         <field name="asset_id" invisible="operation_type not in ['buy', 'sell']"/>
+                         <field name="transaction_datetime"/>
+                         <field name="operation_type"/>
+                         <field name="quantity"/>
+                         <field name="amount"/>
+                         <field name="currency"/>
+                         <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_transaction_tree" model="ir.ui.view">
+        <field name="name">investor.transaction.tree</field>
+        <field name="model">investor.transaction</field>
+        <field name="arch" type="xml">
+            <tree string="Транзакции" decoration-muted="operation_type=='commission'" decoration-success="operation_type=='deposit'" decoration-info="operation_type in ['buy', 'sell']" decoration-danger="operation_type=='withdrawal'">
+                <field name="transaction_datetime"/>
+                <field name="name"/>
+                <field name="account_id"/>
+                <field name="operation_type"/>
+                <field name="amount"/>
+                <field name="currency"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_transaction" model="ir.actions.act_window">
+        <field name="name">Транзакции</field>
+        <field name="res_model">investor.transaction</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

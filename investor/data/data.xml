@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="broker_1" model="investor.broker">
+            <field name="name">Тинькофф Инвестиции</field>
+            <field name="license_number">045-14000-100000</field>
+            <field name="contact_details">Москва, ул. Хуторская 2-я, д. 38А, стр. 26</field>
+        </record>
+        <record id="broker_2" model="investor.broker">
+            <field name="name">СберИнвестор</field>
+            <field name="license_number">077-02894-100000</field>
+            <field name="contact_details">Москва, ул. Вавилова, д. 19</field>
+        </record>
+        <record id="broker_3" model="investor.broker">
+            <field name="name">ВТБ Мои Инвестиции</field>
+            <field name="license_number">040-06595-100000</field>
+            <field name="contact_details">Москва, Пресненская наб., 12</field>
+        </record>
+        <record id="broker_4" model="investor.broker">
+            <field name="name">Финам</field>
+            <field name="license_number">045-02661-100000</field>
+            <field name="contact_details">Москва, пер. Настасьинский, д. 7, стр. 2</field>
+        </record>
+        <record id="broker_5" model="investor.broker">
+            <field name="name">Альфа-Инвестиции</field>
+            <field name="license_number">177-04211-100000</field>
+            <field name="contact_details">Москва, ул. Маши Порываевой, д. 7, стр. 1</field>
+        </record>
+
+        <record id="investor_1" model="investor.investor">
+            <field name="name">Иванов Иван Иванович</field>
+            <field name="birth_date">1990-05-15</field>
+            <field name="phone">+7 (926) 123-45-67</field>
+            <field name="email">ivanov.ii@example.com</field>
+            <field name="broker_ids" eval="[(6, 0, [ref('broker_1'), ref('broker_2')])]"/>
+        </record>
+        <record id="investor_2" model="investor.investor">
+            <field name="name">Петрова Мария Сергеевна</field>
+            <field name="birth_date">1985-11-20</field>
+            <field name="phone">+7 (916) 765-43-21</field>
+            <field name="email">petrova.ms@example.com</field>
+            <field name="broker_ids" eval="[(6, 0, [ref('broker_3')])]"/>
+        </record>
+        <record id="investor_3" model="investor.investor">
+            <field name="name">Сидоров Алексей Викторович</field>
+            <field name="birth_date">1998-02-10</field>
+            <field name="phone">+7 (903) 555-88-99</field>
+            <field name="email">sidorov.av@example.com</field>
+            <field name="broker_ids" eval="[(6, 0, [ref('broker_1')])]"/>
+        </record>
+        <record id="investor_4" model="investor.investor">
+            <field name="name">Кузнецова Ольга Дмитриевна</field>
+            <field name="birth_date">1995-07-30</field>
+            <field name="phone">+7 (925) 111-22-33</field>
+            <field name="email">kuznetsova.od@example.com</field>
+            <field name="broker_ids" eval="[(6, 0, [ref('broker_4'), ref('broker_5')])]"/>
+        </record>
+        <record id="investor_5" model="investor.investor">
+            <field name="name">Михайлов Павел Андреевич</field>
+            <field name="birth_date">1980-09-01</field>
+            <field name="phone">+7 (915) 444-55-66</field>
+            <field name="email">mihailov.pa@example.com</field>
+            <field name="broker_ids" eval="[(6, 0, [ref('broker_2')])]"/>
+        </record>
+
+        <record id="asset_1" model="investor.asset">
+            <field name="name">Газпром</field>
+            <field name="ticker">GAZP</field>
+            <field name="asset_type">stock</field>
+            <field name="currency">RUB</field>
+            <field name="unit_price">175.50</field>
+        </record>
+        <record id="asset_2" model="investor.asset">
+            <field name="name">Сбербанк</field>
+            <field name="ticker">SBER</field>
+            <field name="asset_type">stock</field>
+            <field name="currency">RUB</field>
+            <field name="unit_price">270.80</field>
+        </record>
+        <record id="asset_3" model="investor.asset">
+            <field name="name">Apple Inc.</field>
+            <field name="ticker">AAPL</field>
+            <field name="asset_type">stock</field>
+            <field name="currency">USD</field>
+            <field name="unit_price">172.25</field>
+        </record>
+        <record id="asset_4" model="investor.asset">
+            <field name="name">ОФЗ 26238</field>
+            <field name="ticker">SU26238RMFS4</field>
+            <field name="asset_type">bond</field>
+            <field name="currency">RUB</field>
+            <field name="unit_price">985.40</field>
+        </record>
+        <record id="asset_5" model="investor.asset">
+            <field name="name">Фонд "Ликвидность"</field>
+            <field name="ticker">LQDT</field>
+            <field name="asset_type">fund</field>
+            <field name="currency">RUB</field>
+            <field name="unit_price">1.25</field>
+        </record>
+        
+        <record id="account_1" model="investor.account">
+            <field name="name">40817810000012345678</field>
+            <field name="account_type">broker</field>
+            <field name="open_date" eval="DateTime.now() - relativedelta(months=6)"/>
+            <field name="status">active</field>
+            <field name="investor_id" ref="investor_1"/>
+            <field name="broker_id" ref="broker_1"/>
+        </record>
+        <record id="account_2" model="investor.account">
+            <field name="name">40817810100098765432</field>
+            <field name="account_type">iis</field>
+            <field name="open_date" eval="DateTime.now() - relativedelta(years=1)"/>
+            <field name="status">active</field>
+            <field name="investor_id" ref="investor_2"/>
+            <field name="broker_id" ref="broker_3"/>
+        </record>
+        <record id="account_3" model="investor.account">
+            <field name="name">40817810200024681357</field>
+            <field name="account_type">broker</field>
+            <field name="open_date" eval="DateTime.now() - relativedelta(days=20)"/>
+            <field name="status">active</field>
+            <field name="investor_id" ref="investor_1"/>
+            <field name="broker_id" ref="broker_2"/>
+        </record>
+        <record id="account_4" model="investor.account">
+            <field name="name">30601810500009000015</field>
+            <field name="account_type">depository</field>
+            <field name="open_date" eval="DateTime.now() - relativedelta(years=2)"/>
+            <field name="status">closed</field>
+            <field name="investor_id" ref="investor_4"/>
+            <field name="broker_id" ref="broker_4"/>
+        </record>
+        <record id="account_5" model="investor.account">
+            <field name="name">40817810300011223344</field>
+            <field name="account_type">broker</field>
+            <field name="open_date" eval="DateTime.now() - relativedelta(months=1)"/>
+            <field name="status">active</field>
+            <field name="investor_id" ref="investor_5"/>
+            <field name="broker_id" ref="broker_2"/>
+        </record>
+
+        <record id="transaction_1" model="investor.transaction">
+            <field name="transaction_datetime" eval="DateTime.now() - relativedelta(days=10)"/>
+            <field name="operation_type">deposit</field>
+            <field name="quantity">1</field>
+            <field name="amount">50000</field>
+            <field name="currency">RUB</field>
+            <field name="account_id" ref="account_1"/>
+            <field name="description">Первичное пополнение счета</field>
+        </record>
+        <record id="transaction_2" model="investor.transaction">
+            <field name="transaction_datetime" eval="DateTime.now() - relativedelta(days=9)"/>
+            <field name="operation_type">buy</field>
+            <field name="quantity">100</field>
+            <field name="amount">17550</field>
+            <field name="currency">RUB</field>
+            <field name="account_id" ref="account_1"/>
+            <field name="asset_id" ref="asset_1"/>
+        </record>
+        <record id="transaction_3" model="investor.transaction">
+            <field name="transaction_datetime" eval="DateTime.now() - relativedelta(days=8)"/>
+            <field name="operation_type">buy</field>
+            <field name="quantity">50</field>
+            <field name="amount">13540</field>
+            <field name="currency">RUB</field>
+            <field name="account_id" ref="account_1"/>
+            <field name="asset_id" ref="asset_2"/>
+        </record>
+        <record id="transaction_4" model="investor.transaction">
+            <field name="transaction_datetime" eval="DateTime.now() - relativedelta(days=5)"/>
+            <field name="operation_type">deposit</field>
+            <field name="quantity">1</field>
+            <field name="amount">100000</field>
+            <field name="currency">RUB</field>
+            <field name="account_id" ref="account_2"/>
+            <field name="description">Пополнение ИИС</field>
+        </record>
+        <record id="transaction_5" model="investor.transaction">
+            <field name="transaction_datetime" eval="DateTime.now() - relativedelta(days=4)"/>
+            <field name="operation_type">buy</field>
+            <field name="quantity">50</field>
+            <field name="amount" eval="50 * 985.40"/>
+            <field name="currency">RUB</field>
+            <field name="account_id" ref="account_2"/>
+            <field name="asset_id" ref="asset_4"/>
+        </record>
+        <record id="transaction_6" model="investor.transaction">
+            <field name="transaction_datetime" eval="DateTime.now() - relativedelta(days=1)"/>
+            <field name="operation_type">commission</field>
+            <field name="quantity">1</field>
+            <field name="amount">29</field>
+            <field name="currency">RUB</field>
+            <field name="account_id" ref="account_1"/>
+            <field name="description">Комиссия за обслуживание</field>
+        </record>
+
+    </data>
+</odoo>

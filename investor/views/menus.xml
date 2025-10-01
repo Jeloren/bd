@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_investor_root"
+              name="Управление Инвестициями"
+              sequence="10"/>
+
+    <menuitem id="menu_investor_main"
+              name="Операции"
+              parent="menu_investor_root"
+              sequence="10"/>
+    
+    <menuitem id="menu_investor_accounts"
+              name="Счета"
+              parent="menu_investor_main"
+              action="action_account"
+              sequence="10"/>
+
+    <menuitem id="menu_investor_transactions"
+              name="Транзакции"
+              parent="menu_investor_main"
+              action="action_transaction"
+              sequence="20"/>
+
+    <menuitem id="menu_investor_directory"
+              name="Справочники"
+              parent="menu_investor_root"
+              sequence="20"/>
+
+    <menuitem id="menu_investor_investors"
+              name="Инвесторы"
+              parent="menu_investor_directory"
+              action="action_investor"
+              sequence="10"/>
+
+    <menuitem id="menu_investor_brokers"
+              name="Брокеры"
+              parent="menu_investor_directory"
+              action="action_broker"
+              sequence="20"/>
+
+    <menuitem id="menu_investor_assets"
+              name="Активы"
+              parent="menu_investor_directory"
+              action="action_asset"
+              sequence="30"/>
+</odoo>

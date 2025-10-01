@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_investor_investor,access.investor.investor,model_investor_investor,base.group_user,1,1,1,1
+access_investor_broker,access.investor.broker,model_investor_broker,base.group_user,1,1,1,1
+access_investor_account,access.investor.account,model_investor_account,base.group_user,1,1,1,1
+access_investor_asset,access.investor.asset,model_investor_asset,base.group_user,1,1,1,1
+access_investor_transaction,access.investor.transaction,model_investor_transaction,base.group_user,1,1,1,1
+access_investor_account_asset,access.investor.account.asset,model_investor_account_asset,base.group_user,1,1,1,1

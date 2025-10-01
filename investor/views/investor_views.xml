@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_investor_form" model="ir.ui.view">
+        <field name="name">investor.investor.form</field>
+        <field name="model">investor.investor</field>
+        <field name="arch" type="xml">
+            <form string="Инвестор">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="birth_date"/>
+                        <field name="phone" widget="phone"/>
+                        <field name="email" widget="email"/>
+                    </group>
+                    <notebook>
+                        <page string="Счета">
+                            <field name="account_ids" readonly="1"/>
+                        </page>
+                        <page string="Брокеры">
+                            <field name="broker_ids" widget="many2many_tags"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_investor_tree" model="ir.ui.view">
+        <field name="name">investor.investor.tree</field>
+        <field name="model">investor.investor</field>
+        <field name="arch" type="xml">
+            <tree string="Инвесторы">
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_investor" model="ir.actions.act_window">
+        <field name="name">Инвесторы</field>
+        <field name="res_model">investor.investor</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
