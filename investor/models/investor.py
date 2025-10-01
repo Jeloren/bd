@@ -5,11 +5,12 @@ import re
 class Investor(models.Model):
     _name = 'investor.investor'
     _description = 'Инвестор'
+    _table = 'investor_investor'
 
     name = fields.Char(string="ФИО", required=True)
     birth_date = fields.Date(string="Дата Рождения", required=True)
     phone = fields.Char(string="Контактный Телефон", required=True)
-    email = fields.Char(string="Электронная Почта")
+    email = fields.Char(string="Электронная Почта", required=True)
     
     account_ids = fields.One2many('investor.account', 'investor_id', string="Счета")
     broker_ids = fields.Many2many(
@@ -19,6 +20,15 @@ class Investor(models.Model):
         'broker_id', 
         string="Брокеры"
     )
+    
+    _sql_constraints = [
+        ('phone_uniq', 'unique (phone)', 'Контактный телефон должен быть уникальным.'),
+        ('email_uniq', 'unique (email)', 'Электронная почта должна быть уникальной.')
+    ]
+    _index = [
+        ('name', 'btree'),
+        ('name', 'trigram'),
+    ]
 
     @api.constrains('email')
     def _check_email_format(self):
