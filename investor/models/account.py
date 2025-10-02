@@ -4,7 +4,7 @@ class Account(models.Model):
     _name = 'investor.account'
     _description = 'Счет'
 
-    name = fields.Char(string="Номер Счета", required=True)
+    name = fields.Char(string="Номер Счета", required=True, index=True)
     account_type = fields.Selection([
         ('iis', 'ИИС'),
         ('broker', 'Брокерский'),
@@ -17,8 +17,8 @@ class Account(models.Model):
         ('blocked', 'Заблокирован')
     ], string="Статус", required=True, default='active')
     
-    investor_id = fields.Many2one('investor.investor', string="Инвестор", required=True)
-    broker_id = fields.Many2one('investor.broker', string="Брокер", required=True)
+    investor_id = fields.Many2one('investor.investor', string="Инвестор", required=True, index=True)
+    broker_id = fields.Many2one('investor.broker', string="Брокер", required=True, index=True)
     
     transaction_ids = fields.One2many('investor.transaction', 'account_id', string="Транзакции")
     asset_line_ids = fields.One2many('investor.account.asset', 'account_id', string="Активы на счете")

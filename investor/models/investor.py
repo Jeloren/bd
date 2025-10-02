@@ -7,10 +7,10 @@ class Investor(models.Model):
     _description = 'Инвестор'
     _table = 'investor_investor'
 
-    name = fields.Char(string="ФИО", required=True)
+    name = fields.Char(string="ФИО", required=True, index=True)
     birth_date = fields.Date(string="Дата Рождения", required=True)
-    phone = fields.Char(string="Контактный Телефон", required=True)
-    email = fields.Char(string="Электронная Почта", required=True)
+    phone = fields.Char(string="Контактный Телефон", required=True, index=True)
+    email = fields.Char(string="Электронная Почта", required=True, index=True)
     
     account_ids = fields.One2many('investor.account', 'investor_id', string="Счета")
     broker_ids = fields.Many2many(
@@ -24,10 +24,6 @@ class Investor(models.Model):
     _sql_constraints = [
         ('phone_uniq', 'unique (phone)', 'Контактный телефон должен быть уникальным.'),
         ('email_uniq', 'unique (email)', 'Электронная почта должна быть уникальной.')
-    ]
-    _index = [
-        ('name', 'btree'),
-        ('name', 'trigram'),
     ]
 
     @api.constrains('email')

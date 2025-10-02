@@ -6,7 +6,7 @@ class Asset(models.Model):
     _description = 'Актив'
 
     name = fields.Char(string="Наименование", required=True)
-    ticker = fields.Char(string="Тикер", required=True)
+    ticker = fields.Char(string="Тикер", required=True, index=True)
     asset_type = fields.Selection([
         ('stock', 'Акция'),
         ('bond', 'Облигация'),
@@ -32,8 +32,8 @@ class AccountAsset(models.Model):
     _description = 'Актив на Счете'
     _rec_name = 'asset_id'
 
-    account_id = fields.Many2one('investor.account', string="Счет", required=True, ondelete='cascade')
-    asset_id = fields.Many2one('investor.asset', string="Актив", required=True, ondelete='cascade')
+    account_id = fields.Many2one('investor.account', string="Счет", required=True, ondelete='cascade', index=True)
+    asset_id = fields.Many2one('investor.asset', string="Актив", required=True, ondelete='cascade', index=True)
     quantity = fields.Float(string="Количество", required=True, default=0.0)
 
     _sql_constraints = [

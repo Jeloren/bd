@@ -6,8 +6,8 @@ class Transaction(models.Model):
     _description = 'Транзакция'
     _order = 'transaction_datetime desc'
 
-    name = fields.Char(string="Описание", compute='_compute_display_name', store=True)
-    transaction_datetime = fields.Datetime(string="Дата и Время", required=True, default=fields.Datetime.now)
+    name = fields.Char(string="Описание", compute='_compute_display_name', required=True, store=True)
+    transaction_datetime = fields.Datetime(string="Дата и Время", required=True, default=fields.Datetime.now, index=True)
     operation_type = fields.Selection([
         ('buy', 'Покупка'),
         ('sell', 'Продажа'),
@@ -15,14 +15,14 @@ class Transaction(models.Model):
         ('withdrawal', 'Списание'),
         ('commission', 'Комиссия')
     ], string="Тип Операции", required=True)
-    quantity = fields.Float(string="Количество", default=1.0)
+    quantity = fields.Float(string="Количество", default=1.0, required=True)
     amount = fields.Float(string="Сумма Транзакции", required=True)
     currency = fields.Selection([
         ('RUB', 'RUB'), ('USD', 'USD'), ('EUR', 'EUR')
     ], string="Валюта", required=True, default='RUB')
     
-    account_id = fields.Many2one('investor.account', string="Счет", required=True)
-    asset_id = fields.Many2one('investor.asset', string="Актив")
+    account_id = fields.Many2one('investor.account', string="Счет", required=True, index=True)
+    asset_id = fields.Many2one('investor.asset', string="Актив", index=True)
     
     description = fields.Text(string="Дополнительные детали")
     
