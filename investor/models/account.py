@@ -1,5 +1,5 @@
 from odoo import models, fields
-
+from odoo.exceptions import ValidationError
 class Account(models.Model):
     _name = 'investor.account'
     _description = 'Счет'
@@ -26,3 +26,9 @@ class Account(models.Model):
     _sql_constraints = [
         ('name_uniq', 'unique (name)', 'Номер счета должен быть уникальным.')
     ]
+    
+    @api.constrains('open_date')
+    def _check_open_date(self):
+        for record in self:
+            if record.open_date and record.open_date > fields.Date.today():
+                raise ValidationError("Дата открытия не может быть в будущем.")

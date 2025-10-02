@@ -43,3 +43,15 @@ class Transaction(models.Model):
                 raise ValidationError("Количество должно быть положительным.")
             if record.amount <= 0:
                 raise ValidationError("Сумма транзакции должна быть положительной.")
+            
+    @api.constrains('transaction_datetime')
+    def _check_transaction_datetime(self):
+        for record in self:
+            if record.transaction_datetime and record.transaction_datetime > fields.Datetime.now():
+                raise ValidationError("Дата и время транзакции не могут быть в будущем.")
+    
+    @api.constrains('operation_type', 'asset_id')
+    def _check_asset_for_buy_sell(self):
+        for record in self:
+            if record.operation_type in ['buy', 'sell'] and not record.asset_id:
+                raise ValidationError("Для операций покупки или продажи необходимо указать актив.")
